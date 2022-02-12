@@ -9,7 +9,7 @@ using SMS.Data;
 namespace SMS.Migrations
 {
     [DbContext(typeof(SMSDbContext))]
-    [Migration("20220212081928_InitialDbSet")]
+    [Migration("20220212114542_InitialDbSet")]
     partial class InitialDbSet
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,8 +74,8 @@ namespace SMS.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
                     b.Property<string>("Username")
                         .IsRequired()

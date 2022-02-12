@@ -9,9 +9,9 @@ namespace SMS.Data.Models
         [Key]
         [StringLength(36)]
         public string Id { get; set; } = Guid.NewGuid().ToString();
-
+       
         [Required]
-        [MaxLength(20)]
+        [StringLength(20)]
         public string Username { get; set; }
 
         [Required]
@@ -19,7 +19,7 @@ namespace SMS.Data.Models
         public string Email { get; set; }
 
         [Required]
-        [MaxLength(20)]
+        [StringLength(64)]
         public string Password { get; set; }
 
         [Required]
@@ -28,6 +28,6 @@ namespace SMS.Data.Models
 
         [ForeignKey(nameof(CartId))]
         public Cart Cart { get; set; }
-
     }
 }
+

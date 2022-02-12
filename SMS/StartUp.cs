@@ -1,4 +1,9 @@
-﻿namespace SMS
+﻿using SMS.Contracts;
+using SMS.Data;
+using Sms.Data.Common;
+using SMS.Services;
+
+namespace SMS
 {
     using BasicWebServer.Server;
     using BasicWebServer.Server.Routing;
@@ -12,8 +17,11 @@
                .MapControllers()
                .MapStaticFiles());
 
-            //server.ServiceCollection
-            //    .Add<IUserService, UserService>();
+            server.ServiceCollection
+                .Add<IUserService, UserService>()
+                .Add<SMSDbContext>()
+                .Add<IRepository,Repository>()
+                .Add<IValidationService,ValidationService>();
 
             await server.Start();
         }
