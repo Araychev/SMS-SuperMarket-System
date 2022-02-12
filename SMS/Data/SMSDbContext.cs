@@ -1,4 +1,6 @@
-﻿namespace SMS.Data
+﻿using SMS.Data.Models;
+
+namespace SMS.Data
 {
     using Microsoft.EntityFrameworkCore;
     
@@ -21,5 +23,11 @@
         {
             base.OnModelCreating(modelBuilder);
         }
+
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<Product> Products { get; set; }
+
+        public DbSet<Cart> Carts { get; set; }
     }
 }
