@@ -3,11 +3,7 @@ using BasicWebServer.Server.Controllers;
 using BasicWebServer.Server.HTTP;
 using SMS.Contracts;
 using SMS.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SMS.Controllers
 {
@@ -27,10 +23,10 @@ namespace SMS.Controllers
         {
             if (User.IsAuthenticated)
             {
-                return Redirect("/Trips/All");
+                return Redirect("/");
             }
 
-            return View();
+            return View(new { IsAuthenticated = false });
         }
 
         [HttpPost]
@@ -50,17 +46,17 @@ namespace SMS.Controllers
             cookies.Add(Session.SessionCookieName,
                 Request.Session.Id);
 
-            return Redirect("/Trips/All");
+            return Redirect("/");
         }
 
         public Response Register()
         {
             if (User.IsAuthenticated)
             {
-                return Redirect("/Trips/All");
+                return Redirect("/");
             }
 
-            return View();
+            return View(new { IsAuthenticated = false });
         }
 
         [HttpPost]
