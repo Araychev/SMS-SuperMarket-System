@@ -2,13 +2,10 @@
 using SMS.Data.Models;
 using SMS.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Sms.Data.Common;
 using System.Security.Cryptography;
-using System.ComponentModel.DataAnnotations;
 
 namespace SMS.Services
 {
@@ -35,10 +32,10 @@ namespace SMS.Services
 
         public string Login(LoginViewModel model)
         {
-            var user = repo.All<User>()
+            var user = repo
+                .All<User>()
                 .Where(u => u.Username == model.Username)
-                .Where(u => u.Password == CalculateHash(model.Password))
-                .SingleOrDefault();
+                .SingleOrDefault(u => u.Password == CalculateHash(model.Password));
 
             return user?.Id;
         }
@@ -48,6 +45,7 @@ namespace SMS.Services
             bool registered = false;
             string error = null;
 
+           
             var (isValid, validationError) = validationService.ValidateModel(model);
 
             if (!isValid)
@@ -68,9 +66,19 @@ namespace SMS.Services
 
             try
             {
-                repo.Add(user);
-                repo.SaveChanges();
-                registered = true;
+
+                if (repo.All<User>()
+                    .Any(u=>u.Username == user.Username))
+                {
+                    registered = false;
+                    error = "There is user whit this Username! Please chose another one";
+                }
+                else
+                {
+                    repo.Add(user);
+                    repo.SaveChanges();
+                    registered = true;
+                }
             }
             catch (Exception)
             {

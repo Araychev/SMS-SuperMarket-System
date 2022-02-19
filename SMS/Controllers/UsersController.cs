@@ -27,10 +27,10 @@ namespace SMS.Controllers
         {
             if (User.IsAuthenticated)
             {
-                return Redirect("/");
+                return Redirect("/Trips/All");
             }
 
-            return View(new { IsAuthenticated = false });
+            return View();
         }
 
         [HttpPost]
@@ -50,17 +50,17 @@ namespace SMS.Controllers
             cookies.Add(Session.SessionCookieName,
                 Request.Session.Id);
 
-            return Redirect("/");
+            return Redirect("/Trips/All");
         }
 
         public Response Register()
         {
             if (User.IsAuthenticated)
             {
-                return Redirect("/");
+                return Redirect("/Trips/All");
             }
 
-            return View(new { IsAuthenticated = false });
+            return View();
         }
 
         [HttpPost]
